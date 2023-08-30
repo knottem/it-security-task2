@@ -17,6 +17,6 @@ public class User {
     @NotBlank
     private String username;
 
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\/-]).{8,}$") // T.ex: Password!123
+    //@Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\/-]).{8,}$") // T.ex: Password!123
     private String password;
 }
