@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+        h2 {
+            text-align: center;
+            margin: auto;
+        }
+        h3 {
+            margin: auto;
+            text-align: center;
+        }
+        .btn {
+            margin: auto;
+            position: relative;
+        }
+
+        .box {
+            padding: 25px;
+            margin: auto;
+            background: rgba(123, 121, 168, 0.53);
+            width: 50%;
+        }
+
+    </style>
+    <title>Super secure application</title>
+</head>
+<body>
+<div class="box">
+<br>
+<h2>Your account was created successfully!</h2>
+<br>
+<h3>Continue to login page</h3>
+
+
+        <a th:href="@{/users/login}">
+            <input type="button" value="Continue" class="btn" /></a>
+</div>
+
+</body>
+</html>
