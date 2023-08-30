@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface UserService {
 
-    String newUser(Model model);
+    String newUser(User user, Model model);
 
-    Boolean logInSuccessful(Model model);
+    Boolean logInSuccessful(User user);
 
     List<UserEntity> findAll();
 

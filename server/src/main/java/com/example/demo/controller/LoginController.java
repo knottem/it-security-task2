@@ -6,6 +6,8 @@ import com.example.demo.services.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +33,7 @@ public class LoginController {
         return "loginpage";
     }
 
+
     @PostMapping("/login")
     public String postLogin(@Valid User user, BindingResult bindingResult, Model model) {
 
@@ -39,14 +42,12 @@ public class LoginController {
             model.addAttribute("msg", "Something went wrong");
             return "loginpage";
         }
-
-        model.addAttribute("user", user);
-
-        if (userServiceImpl.logInSuccessful(model)) {
+        if (userServiceImpl.logInSuccessful(user)) {
             return "successful";
         } else
             return "loginpage";
     }
+
 
     @GetMapping("/create")
     public String getCreate() {
@@ -60,7 +61,7 @@ public class LoginController {
             model.addAttribute("msg", "Something went wrong");
             return "createaccount";
         }
-        return userServiceImpl.newUser(model);
+        return userServiceImpl.newUser(user, model);
     }
 
     @GetMapping("/test")
@@ -68,6 +69,8 @@ public class LoginController {
         model.addAttribute("users", userServiceImpl.findAll());
         return "test";
     }
+
+
 }
 
 

@@ -27,8 +27,7 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String newUser(Model model) {
-        User user = (User) model.getAttribute("user");
+    public String newUser(User user, Model model) {
         if (!userRepository.existsByUsername(user.getUsername())) {
 
             String encryptedPassword = passwordEncoder.encode(user.getPassword());
@@ -48,9 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean logInSuccessful(Model model) {
-        User user = (User) model.getAttribute("user");
-
+    public Boolean logInSuccessful(User user) {
         return passwordEncoder.matches(user.getPassword(),
                 userRepository.findByUsername(
                         user.getUsername()).getPassword());
