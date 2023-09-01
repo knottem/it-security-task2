@@ -15,7 +15,7 @@ public class BruteForce {
     String api = "http://localhost:8081/loginforce";
 
     String filepath = "server/src/main/resources/pincodes.txt";
-    String userAdmin = "apa";
+    String userAdmin = "apa5555";
     int iterations = 9999;
 
     private void Program(){
@@ -46,11 +46,10 @@ public class BruteForce {
 
     private void logicBruteForce(){
         long start = System.nanoTime();
-        for (String password : fileReader(filepath)) {
-            String formatPassword = String.valueOf(password);
+        List<String> passwords = fileReader(filepath);
+        for (String password : passwords) {
             System.out.println("Attempt: " + password);
-
-            if (apiRequest(userAdmin, formatPassword)) {
+            if (apiRequest(userAdmin, password)) {
                 System.out.println("Correct password: " + password);
                 break;
             }
@@ -76,8 +75,8 @@ public class BruteForce {
             return con.getResponseCode() == 200;
         }catch (Exception e){
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     private List<String> fileReader(String filepath){
